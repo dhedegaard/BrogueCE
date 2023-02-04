@@ -33,6 +33,34 @@ jobs:
         name: linux-x86_64
         path: BrogueCE-linux-x86_64.tar.gz
 
+  linux-arm64:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: "Install dependencies"
+      run: |
+        sudo apt update -y
+        sudo apt install -y libsdl2-dev libsdl2-image-dev gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
+
+    - name: "Checkout sources"
+      uses: actions/checkout@v2
+
+    - name: "Compile"
+      run: |
+        make bin/brogue
+      with:
+        CC: aarch64-linux-gnu-gcc
+
+    - name: "Create artifact"
+      run: |
+        make BrogueCE-linux
+        tar -czvf BrogueCE-linux-arm64.tar.gz BrogueCE-linux
+
+    - name: "Upload artifact"
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux-arm64
+        path: BrogueCE-linux-arm64.tar.gz
+
   macos:
     runs-on: macos-latest
     steps:
