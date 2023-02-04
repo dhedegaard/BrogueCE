@@ -47,7 +47,7 @@ jobs:
     - name: "Compile"
       run: |
         make bin/brogue
-      with:
+      env:
         CC: aarch64-linux-gnu-gcc
 
     - name: "Create artifact"
