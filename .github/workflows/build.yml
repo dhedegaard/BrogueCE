@@ -36,10 +36,14 @@ jobs:
   linux-arm64:
     runs-on: ubuntu-22.04
     steps:
+    - name: "Enable arm64 architecture"
+    - run: |
+        sudo dpkg --add-architecture arm64
+
     - name: "Install dependencies"
       run: |
         sudo apt update -y
-        sudo apt install -y libsdl2-dev libsdl2-image-dev gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
+        sudo apt install -y libsdl2-dev:arm64 libsdl2-image-dev:arm64 gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
 
     - name: "Checkout sources"
       uses: actions/checkout@v2
