@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - name: "Enable arm64 architecture"
-    - run: |
+      run: |
         sudo dpkg --add-architecture arm64
 
     - name: "Install dependencies"
